@@ -11,5 +11,5 @@ import java.util.List;
 public class Student extends SchoolPersonnel
 {
     @OneToMany
-    private List<Courses> coursesList;
+    private List<Course> courseList;
 }
