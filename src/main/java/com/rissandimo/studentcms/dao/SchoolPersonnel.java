@@ -9,11 +9,8 @@ import javax.persistence.Id;
 
 @Data
 @Entity
-public class SchoolPersonnel
+public class SchoolPersonnel extends BaseEntity<Long>
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
     private String firstName;
     private String lastName;
 }
