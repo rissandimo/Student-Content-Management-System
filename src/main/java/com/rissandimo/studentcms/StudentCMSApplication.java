@@ -4,10 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StudentcmsApplication {
+public class StudentCMSApplication
+{
 
 	public static void main(String[] args) {
-		SpringApplication.run(StudentcmsApplication.class, args);
+		SpringApplication.run(StudentCMSApplication.class, args);
 	}
 
 }
