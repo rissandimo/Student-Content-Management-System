@@ -36,7 +36,7 @@ public class InstructorController
         return instructorRepository.save(instructor);
     }
 
-    @DeleteMapping("/instuctors/{id}")
+    @DeleteMapping("/instructors/{id}")
     public void deleteInstructorById(@PathVariable("id") int id)
     {
         instructorRepository.deleteById(id);
