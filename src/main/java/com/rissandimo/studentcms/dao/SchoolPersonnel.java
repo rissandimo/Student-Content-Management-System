@@ -7,8 +7,15 @@ import javax.persistence.*;
 @Data
 @Entity
 @DiscriminatorColumn(name = "personnel_type")
-public class SchoolPersonnel extends BaseEntity<Long>
+class SchoolPersonnel extends BaseEntity<Long>
 {
-    private String firstName;
-    private String lastName;
+     SchoolPersonnel()
+    {
+
+    }
+
+    SchoolPersonnel(String firstName, String lastName)
+    {
+        super(firstName, lastName);
+    }
 }
