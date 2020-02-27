@@ -2,6 +2,7 @@ package com.rissandimo.studentcms.dao;
 
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,28 +15,41 @@ public abstract class BaseEntity<PK extends Serializable> {
     @GeneratedValue
     private PK id;
 
+    private String firstName;
+    private String lastName;
+
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName)
+    {
+        this.firstName = firstName;
+    }
+
+    public String getLastName()
+    {
+        return lastName;
+    }
+
+    public void setLastName(String lastName)
+    {
+        this.lastName = lastName;
+    }
+
+    public BaseEntity()
+    {
+    }
+
+    public BaseEntity(String firstName, String lastName)
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public PK getId() {
         return id;
     }
 
-    public void setId(PK id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        if (getId() != null) {
-            return getId().hashCode();
-        }
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
-        BaseEntity<?> other = (BaseEntity<?>) obj;
-        return id != null && id.equals(other.id);
-    }
 }

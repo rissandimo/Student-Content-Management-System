@@ -10,19 +10,12 @@ import java.util.List;
 @Entity
 public class Instructor extends SchoolPersonnel
 {
-
     @OneToMany
     private List<Course> courseList;
 
-    private String name;
-
-    public Instructor()
+    public Instructor(String firstName, String latName)
     {
-    }
-
-    public Instructor(String name)
-    {
-        this.name = name;
+        super(firstName, latName);
     }
 
     public List<Course> getCourseList()
