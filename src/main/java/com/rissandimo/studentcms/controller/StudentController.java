@@ -32,9 +32,11 @@ public class StudentController
     }
 
     @PostMapping("/students")
-    public Student createStudent(@Valid @RequestBody Student student)
+    public Student createStudent(@RequestBody Student student)
     {
-        return studentRepository.save(student);
+        Student newStudent = studentRepository.save(student);
+        newStudent.setStudentNumber(newStudent.getId());
+        return newStudent;
     }
 
     @DeleteMapping("/students/{id}")
