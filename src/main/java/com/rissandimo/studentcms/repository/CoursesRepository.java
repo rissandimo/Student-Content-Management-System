@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CoursesRepository extends JpaRepository<Course, Integer>
 {
+    //find courses by a student id
 }

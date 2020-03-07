@@ -35,7 +35,6 @@ public class StudentController
     public Student createStudent(@RequestBody Student student)
     {
         Student newStudent = studentRepository.save(student);
-        newStudent.setStudentNumber(newStudent.getId());
         return newStudent;
     }
 
@@ -44,4 +43,6 @@ public class StudentController
     {
         studentRepository.deleteById(id);
     }
+
+    // add method to view courses enrolled in
 }
