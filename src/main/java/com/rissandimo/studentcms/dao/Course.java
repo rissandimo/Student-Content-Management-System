@@ -6,12 +6,24 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-public class Course extends BaseEntity<Long>
+public class Course
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private int currentNumberOfStudents;
     private int maxNumOfStudents;
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
 
     public Course()
     {
@@ -23,14 +35,7 @@ public class Course extends BaseEntity<Long>
         this.maxNumOfStudents = maxNumOfStudents;
     }
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-                        CascadeType.REFRESH, CascadeType.DETACH})
-    @JoinTable
-            (
-            name = "student_courses",
-            joinColumns = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id")
-            )
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private Set<Student> enrolledStudents = new HashSet<>();
 
 
@@ -51,4 +56,11 @@ public class Course extends BaseEntity<Long>
         return false;
     }
 
+    public boolean removeStudent(Student studentToUnregister)
+    {
+        enrolledStudents.remove(studentToUnregister);
+        studentToUnregister.removeCourse(this);
+        currentNumberOfStudents--;
+        return true;
+    }
 }
