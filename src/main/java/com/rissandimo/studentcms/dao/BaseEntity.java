@@ -1,19 +1,18 @@
 package com.rissandimo.studentcms.dao;
 
 
-import java.io.Serializable;
-import java.util.Objects;
 
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class BaseEntity<PK extends Serializable> {
+public abstract class BaseEntity{
 
     @Id
-    @GeneratedValue
-    private PK id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     private String firstName;
     private String lastName;
@@ -48,7 +47,7 @@ public abstract class BaseEntity<PK extends Serializable> {
         this.lastName = lastName;
     }
 
-    public PK getId() {
+    public int getId() {
         return id;
     }
 

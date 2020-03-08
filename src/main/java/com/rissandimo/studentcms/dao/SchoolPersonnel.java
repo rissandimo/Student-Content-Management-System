@@ -4,10 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Data
 @Entity
 @DiscriminatorColumn(name = "personnel_type")
-class SchoolPersonnel extends BaseEntity<Long>
+class SchoolPersonnel extends BaseEntity
 {
      SchoolPersonnel()
     {

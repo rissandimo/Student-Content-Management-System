@@ -10,8 +10,32 @@ import java.util.Set;
 public class Student extends SchoolPersonnel
 {
 
+    public Student ()
+    {
+
+    }
+
+    public Student(String firstName, String lastName)
+    {
+        super(firstName, lastName);
+    }
+
+    private int studentNumber;
+
+    public int getStudentNumber()
+    {
+        return studentNumber;
+    }
+
+    public void setStudentNumber(int studentNumber)
+    {
+        this.studentNumber = studentNumber;
+    }
+
+
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE,
-                            CascadeType.PERSIST, CascadeType.REFRESH})
+                            CascadeType.PERSIST, CascadeType.REFRESH},
+    fetch = FetchType.EAGER)
     @JoinTable(
             name = "student_courses",
             joinColumns = @JoinColumn(name = "student_id"),
@@ -27,5 +51,11 @@ public class Student extends SchoolPersonnel
     public void addCourse(Course newCourse)
     {
         this.courseList.add(newCourse);
+    }
+
+    @Override
+    public String toString()
+    {
+        return getFirstName() + " " + getLastName() + " " + getCourseList();
     }
 }

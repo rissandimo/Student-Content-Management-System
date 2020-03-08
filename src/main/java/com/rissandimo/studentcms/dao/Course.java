@@ -2,7 +2,6 @@ package com.rissandimo.studentcms.dao;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -35,7 +34,13 @@ public class Course
         this.maxNumOfStudents = maxNumOfStudents;
     }
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+            CascadeType.PERSIST, CascadeType.REFRESH})
+
+    @JoinTable(
+            name = "student_courses",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id"))
     private Set<Student> enrolledStudents = new HashSet<>();
 
 
@@ -44,23 +49,26 @@ public class Course
         return enrolledStudents;
     }
 
-    public boolean addStudent(Student newStudent)
+    public void addStudent(Student newStudent)
     {
-        if(maxNumOfStudents < currentNumberOfStudents)
+        if(currentNumberOfStudents < maxNumOfStudents)
         {
-            this.enrolledStudents.add(newStudent);
+            enrolledStudents.add(newStudent);
             newStudent.addCourse(this);
             currentNumberOfStudents++;
-            return true;
         }
-        return false;
     }
 
     public boolean removeStudent(Student studentToUnregister)
     {
         enrolledStudents.remove(studentToUnregister);
-        studentToUnregister.removeCourse(this);
         currentNumberOfStudents--;
         return true;
+    }
+
+    @Override
+    public String toString()
+    {
+        return name;
     }
 }

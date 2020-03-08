@@ -1,6 +1,8 @@
 package com.rissandimo.studentcms.SchoolInitializer;
 
+import com.rissandimo.studentcms.dao.Course;
 import com.rissandimo.studentcms.dao.Student;
+import com.rissandimo.studentcms.repository.CoursesRepository;
 import com.rissandimo.studentcms.repository.StudentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +16,9 @@ public class SchoolInitializer implements CommandLineRunner
     @Autowired
     private StudentRepository studentRepository;
 
+    @Autowired
+    private CoursesRepository coursesRepository;
+
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
@@ -23,5 +28,19 @@ public class SchoolInitializer implements CommandLineRunner
         Student student = new Student("John", "Smith");
         studentRepository.save(student);
         logger.info("Student: " + student);
+
+        // create and save course
+        Course course = new Course("History", 25);
+        coursesRepository.save(course);
+
+       //bind student with course
+        course.addStudent(student);
+
+        logger.info("student: " + student);
+
+        //update student and course
+        coursesRepository.save(course);
+
+
     }
 }
