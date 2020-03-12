@@ -2,6 +2,7 @@ package com.rissandimo.studentcms.dao;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -69,6 +70,22 @@ public class Course
     @Override
     public String toString()
     {
-        return name;
+        return getId() + " : " + name;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return Objects.equals(name, course.name);
+    }
+
+    @Override
+    public int hashCode()
+    {
+
+        return Objects.hash(name);
     }
 }

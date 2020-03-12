@@ -4,6 +4,7 @@ package com.rissandimo.studentcms.dao;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -56,6 +57,23 @@ public class Student extends SchoolPersonnel
     @Override
     public String toString()
     {
-        return getFirstName() + " " + getLastName() + " " + getCourseList();
+        return getId() + " : " + getFirstName() + " " + getLastName() + "\n" +
+               "Courses: "  + getCourseList();
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return studentNumber == student.studentNumber;
+    }
+
+    @Override
+    public int hashCode()
+    {
+
+        return Objects.hash(studentNumber);
     }
 }

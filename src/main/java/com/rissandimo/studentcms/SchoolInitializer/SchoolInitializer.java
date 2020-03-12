@@ -32,14 +32,16 @@ public class SchoolInitializer implements CommandLineRunner
         // create and save course
         Course course = new Course("History", 25);
         coursesRepository.save(course);
+        logger.info("Course: " + course);
 
-       //bind student with course
+
+        //bind student with course
         course.addStudent(student);
-
-        logger.info("student: " + student);
+        logger.info("Student binded with course");
 
         //update student and course
         coursesRepository.save(course);
+        logger.info("Course persisted " + student + " " + course);
 
 
     }
